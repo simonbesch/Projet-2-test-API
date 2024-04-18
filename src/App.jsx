@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Infos from "./componants/Infos";
 import paiss from "./data.js";
+import env from "react-dotenv";
+
 
 import "./App.css";
 
@@ -78,8 +80,8 @@ function App() {
   };
 
   useEffect(() => {
-    const KEYWEATHER = "a64b288f12ac5afada93e8e8c413d270";
-    const KEYCHANGE = "a9ac5f398a1be13e9f3d8995";
+    const KEYWEATHER = "your api key";
+    const KEYCHANGE = "your api key";
 
     /**
      * Ensuite, à partir de 2eme render, j'éxécute les appels des fonctions
