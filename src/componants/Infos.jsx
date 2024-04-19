@@ -38,7 +38,7 @@ function Infos({
             alt=""
           />
           <p>for {temp}°C</p>
-          <p>air speed : {wind} m/h</p>
+          <p>air speed : {wind} m/s</p>
           <h2>Whats time is it ?</h2>
           <p>
             {timeHeure} the {timeDate}{" "}
