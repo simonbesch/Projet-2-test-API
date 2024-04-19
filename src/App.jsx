@@ -3,8 +3,6 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Infos from "./componants/Infos";
 import paiss from "./data.js";
-import env from "react-dotenv";
-
 
 import "./App.css";
 
@@ -80,8 +78,8 @@ function App() {
   };
 
   useEffect(() => {
-    const KEYWEATHER = "your api key";
-    const KEYCHANGE = "your api key";
+    const KEYWEATHER = "";
+    const KEYCHANGE = "";
 
     /**
      * Ensuite, à partir de 2eme render, j'éxécute les appels des fonctions
@@ -150,6 +148,8 @@ function App() {
           abrev={stateAbrev}
           abrevMaj={time?.sys.country}
           time={time?.weather[0].description}
+          icon={time?.weather[0].icon}
+          wind={time?.wind.speed}
           temp={Math.floor(time?.main.temp - 273.15)}
           exchangeUSD={exchange?.conversion_rates.USD}
           exchangeEUR={exchange?.conversion_rates.EUR}

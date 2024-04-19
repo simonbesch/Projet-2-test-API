@@ -6,6 +6,8 @@ function Infos({
   abrev,
   abrevMaj,
   time,
+  icon,
+  wind,
   temp,
   exchangeUSD,
   exchangeEUR,
@@ -27,9 +29,13 @@ function Infos({
           <h5>capital :</h5>
           <p> {capital}</p>
           <h5>What is the weather actually ?</h5>
-          <p>
-            {time} for {temp}°
-          </p>
+          <p>{time}</p>
+          <img
+            src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
+            alt=""
+          />
+          <p>for {temp}°C</p>
+          <p>air speed : {wind} m/h</p>
           <h5>Change :</h5>
           <p>
             1 {monnaie} = {exchangeUSD} USD / {exchangeEUR} EUR
@@ -59,6 +65,8 @@ Infos.propTypes = {
   abrev: PropTypes.string,
   abrevMaj: PropTypes.string,
   time: PropTypes.string,
+  icon: PropTypes.string,
+  wind: PropTypes.number,
   temp: PropTypes.number,
   exchangeUSD: PropTypes.number,
   exchangeEUR: PropTypes.number,
