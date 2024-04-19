@@ -18,10 +18,12 @@ function App() {
   const [stateCapital, setStateCapital] = useState("");
   const [stateMonaie, setStateMonaie] = useState("");
   const [stateAbrev, setStateAbrev] = useState("");
+  const [stateApiTime, setStateApiTime] = useState("");
 
   const [time, setTime] = useState([]);
   const [dayOff, setDayOff] = useState([]);
   const [exchange, setExchange] = useState([]);
+  const [timeZone, setTimeZone] = useState([]);
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -36,6 +38,20 @@ function App() {
       .get(`https://date.nager.at/api/v3/PublicHolidays/2024/${stateAbrev}`)
       .then(function (response) {
         setDayOff(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  /**
+   * Permet de récuperer la time zone d'un pays
+   */
+  const getTime = () => {
+    axios
+      .get(`http://worldtimeapi.org/api/timezone/${stateApiTime}`)
+      .then(function (response) {
+        setTimeZone(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -91,6 +107,7 @@ function App() {
       isInitialMount.current = false;
     } else {
       getPublicHolidays();
+      getTime();
       getWeather(KEYWEATHER);
       getExchange(KEYCHANGE);
     }
@@ -108,7 +125,8 @@ function App() {
         setStatePays(data.pais[`${searchTerm}`]?.countrie),
         setStateCapital(data.pais[`${searchTerm}`]?.capital),
         setStateMonaie(data.pais[`${searchTerm}`]?.exchange),
-        setStateAbrev(data.pais[`${searchTerm}`]?.abrev)
+        setStateAbrev(data.pais[`${searchTerm}`]?.abrev),
+        setStateApiTime(data.pais[`${searchTerm}`]?.apitime)
       )
     );
 
@@ -146,6 +164,7 @@ function App() {
           capital={stateCapital}
           monnaie={stateMonaie}
           abrev={stateAbrev}
+          timeZone={timeZone.datetime}
           abrevMaj={time?.sys.country}
           time={time?.weather[0].description}
           icon={time?.weather[0].icon}

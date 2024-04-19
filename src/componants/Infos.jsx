@@ -4,6 +4,7 @@ function Infos({
   capital,
   monnaie,
   abrev,
+  timeZone,
   abrevMaj,
   time,
   icon,
@@ -13,11 +14,13 @@ function Infos({
   exchangeEUR,
   dayOff,
 }) {
+  const [timeDate, timeRest] = timeZone.split("T");
+  const [timeHeure, timeRestTwo] = timeRest.split(".");
   return (
     <>
       {pays ? (
         <>
-          <h5>Pays:</h5>
+          <h2>Pays:</h2>
           <p>
             {pays}, {abrevMaj}
           </p>
@@ -26,9 +29,9 @@ function Infos({
             width="30"
             alt={abrev}
           />
-          <h5>capital :</h5>
+          <h2>Capital :</h2>
           <p> {capital}</p>
-          <h5>What is the weather actually ?</h5>
+          <h2>What is the weather actually ?</h2>
           <p>{time}</p>
           <img
             src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
@@ -36,11 +39,16 @@ function Infos({
           />
           <p>for {temp}°C</p>
           <p>air speed : {wind} m/h</p>
-          <h5>Change :</h5>
+          <h2>Whats time is it ?</h2>
+          <p>
+            {timeHeure} the {timeDate}{" "}
+            <span style={{ display: "none" }}>{timeRestTwo}</span>
+          </p>
+          <h2>Change :</h2>
           <p>
             1 {monnaie} = {exchangeUSD} USD / {exchangeEUR} EUR
           </p>
-          <h5>Days OFF :</h5>
+          <h2>Days OFF :</h2>
           <span>
             {dayOff.map((e, index) => (
               <div key={index}>
@@ -63,6 +71,7 @@ Infos.propTypes = {
   capital: PropTypes.string,
   monnaie: PropTypes.string,
   abrev: PropTypes.string,
+  timeZone: PropTypes.string,
   abrevMaj: PropTypes.string,
   time: PropTypes.string,
   icon: PropTypes.string,
